@@ -8,12 +8,14 @@ import {
   Delete,
   UseGuards,
   Request,
+  Query,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
-import { AuthGuard } from '../auth/auth.guard'; // Guard Importu
+import { AuthGuard } from '../auth/auth.guard';
+import { GetTodosFilterDto } from './dto/get-todos-filter.dto'; // Guard Importu
 
 @ApiTags('Görevler (Todos)')
 @ApiBearerAuth()
@@ -31,8 +33,9 @@ export class TodosController {
 
   @Get()
   @ApiOperation({ summary: 'Benim görevlerimi listele' })
-  findAll(@Request() req) {
-    return this.todosService.findAll(req.user.sub);
+  findAll(@Request() req, @Query() filterDto: GetTodosFilterDto) {
+    // URL'den gelen ?page=1&search=elma gibi bilgileri filterDto olarak alıyoruz
+    return this.todosService.findAll(req.user.sub, filterDto);
   }
 
   @Get(':id')
