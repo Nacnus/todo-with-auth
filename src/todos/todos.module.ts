@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma.service';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [AuthModule], // 2. Modülü buraya ekleyin
+  imports: [AuthModule],
   controllers: [TodosController],
   providers: [TodosService, PrismaService],
 })

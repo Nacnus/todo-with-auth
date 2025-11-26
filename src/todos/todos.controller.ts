@@ -16,8 +16,8 @@ import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard'; // Guard Importu
 
 @ApiTags('Görevler (Todos)')
-@ApiBearerAuth() // Swagger'da kilit ikonu çıksın
-@UseGuards(AuthGuard) // 🔒 TÜM ENDPOINTLER KORUMALI
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @Controller('todos')
 export class TodosController {
   constructor(private readonly todosService: TodosService) {}
